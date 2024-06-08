@@ -5,13 +5,11 @@ import subprocess
 from typing import Optional
 
 def locate_executable(command) -> Optional[str]:
-    path = os.environ['PATH']
-    print("Path: " + path)
-    print(f"Param: {command}")
+    path = os.environ.get("PATH", "")
     for directory in path.split(":"):
-        for (dirpath, dirnames, filenames) in os.walk(directory):
-            if command in filenames:
-                return f"{dirpath}/{command}"
+        file_path = os.path.join(directory, command)
+        if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
+            return file_path
     return None
 
 def action_echo(user_command):
