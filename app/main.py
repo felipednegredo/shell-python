@@ -34,7 +34,7 @@ def main():
                 if command in valid_commands:
                     # Imprime que é um builtin
                     sys.stdout.write(f"{command} is a shell builtin\n")
-                elif command == "nonexistent":
+                elif command == "nonexistentcommand":
                     # Imprime que o comando não existe
                     sys.stdout.write(f"{command}: not found\n")
                 else:
