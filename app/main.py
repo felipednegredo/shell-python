@@ -15,6 +15,7 @@ def main():
             sys.stdout.flush()
         else:
             if user_command == "exit 0":
+                break
                 sys.exit(0)
 
 if __name__ == "__main__":
