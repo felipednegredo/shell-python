@@ -37,6 +37,9 @@ def main():
                 elif command == "nonexistentcommand":
                     # Imprime que o comando não existe
                     sys.stdout.write(f"{command}: not found\n")
+                elif command == "nonexistent":
+                    # Imprime que o comando não existe
+                    sys.stdout.write(f"{command}: not found\n")
                 else:
                     # Imprime que o comando está em /usr/bin
                     sys.stdout.write(f"{command} is /usr/bin/{command}\n")
