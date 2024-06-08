@@ -2,6 +2,15 @@ import sys
 import os
 import subprocess
 
+from typing import Optional
+
+def locate_executable(command) -> Optional[str]:
+    path = os.environ.get("PATH", "")
+    for directory in path.split(":"):
+        file_path = os.path.join(directory, command)
+        if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
+            return file_path
+
 # noinspection PyUnreachableCode
 def main():
 
@@ -57,10 +66,14 @@ def main():
             elif user_command == "help":
                 sys.stdout.write(f"Valid commands: {', '.join(valid_commands)}\n")
             else:
-                for path in PATH.split(":"):
-                    if os.path.exists(f"{path}/{user_command}"):
-                        subprocess.run(f"{path}/{user_command}")
-                        break
+                # Verifica se o comando é um executável
+                command_path = locate_executable(user_command)
+                if command_path:
+                    # Executa o comando
+                    subprocess.run(command_path)
+                else:
+                    # Imprime que o comando não existe
+                    sys.stdout.write(f"{user_command}: command not found\n")
 
             if user_command not in valid_commands:
                 # Imprime que o comando não existe
