@@ -4,7 +4,7 @@ import sys
 # noinspection PyUnreachableCode
 def main():
 
-    valid_commands = ["echo","exit 0","type"]
+    valid_commands = ["echo","exit","type"]
 
     while True:
         sys.stdout.write("$ ")
