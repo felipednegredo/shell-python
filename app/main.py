@@ -1,11 +1,11 @@
 import sys
-
+import os
 
 # noinspection PyUnreachableCode
 def main():
 
     # Lista de comandos válidos
-    valid_commands = ["echo","exit","type"]
+    valid_commands = ["echo","exit","type","help"]
 
     # Loop para simular o shell
     while True:
@@ -13,6 +13,8 @@ def main():
         sys.stdout.write("$ ")
         # Força a escrita do buffer
         sys.stdout.flush()
+
+        PATH = os.getenv("PATH")
 
         # Lê a entrada do usuário
         if user_command := input().strip():
@@ -30,6 +32,12 @@ def main():
             elif user_command.startswith("type "):
                 # Pega o comando
                 command = user_command[5:]
+                command_path = None
+                paths = PATH.split(":")
+                for path in paths:
+                    if os.path.exists(f"{path}/{command}"):
+                        command_path = f"{path}/{command}"
+                        break
                 # Verifica se é um builtin
                 if command in valid_commands:
                     # Imprime que é um builtin
@@ -45,6 +53,9 @@ def main():
                     sys.stdout.write(f"{command} is /usr/bin/{command}\n")
                 continue
                 # Se não for nenhum dos comandos acima, imprime que o comando não existe
+            elif user_command == "help":
+                sys.stdout.write(f"Valid commands: {', '.join(valid_commands)}\n")
+
             if user_command not in valid_commands:
                 # Imprime que o comando não existe
                 sys.stdout.write(f"{user_command}: command not found\n")
