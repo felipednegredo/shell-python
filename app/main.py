@@ -61,7 +61,7 @@ def main():
                 valids_commands[command](user_command)
             else:
                 # Executa o comando
-                subprocess.run(user_command, shell=True, check=True)
+                subprocess.run(user_command, shell=True)
 
 
 if __name__ == "__main__":
