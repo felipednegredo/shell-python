@@ -7,7 +7,7 @@ def main():
     sys.stdout.flush()
 
     command = input()
-    sys.stdout.write(f"Command: {command} not found\n")
+    sys.stdout.write(f"{command} not found\r\n")
 
 
 if __name__ == "__main__":
