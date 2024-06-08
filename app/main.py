@@ -49,8 +49,8 @@ def main():
                     # Imprime que o comando não existe
                     sys.stdout.write(f"{command}: not found\n")
                 else:
-                    # Imprime que o comando está em /usr/bin
-                    sys.stdout.write(f"{command} is /usr/bin/{command}\n")
+                    # Imprime que o comando está em /bin
+                    sys.stdout.write(f"{command} is /bin/{command}\n")
                 continue
                 # Se não for nenhum dos comandos acima, imprime que o comando não existe
             elif user_command == "help":
