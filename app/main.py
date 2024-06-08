@@ -26,7 +26,7 @@ def action_type(user_command):
     elif command_path:
         sys.stdout.write(f"{command} is {command_path}\n")
     else:
-        sys.stdout.write(f"{command}: not found\n")
+        sys.stdout.write(f"{command}: command not found\n")
     sys.stdout.flush()
 
 
