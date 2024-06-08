@@ -3,11 +3,15 @@ import sys
 
 def main():
 
-    sys.stdout.write("$ ")
-    sys.stdout.flush()
+    valid_commands = []
 
-    command = input()
-    sys.stdout.write(f"{command}: command not found\n")
+    while True:
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
+
+        user_command = input()
+        if user_command not in valid_commands:
+            sys.stdout.write(f"{user_command}: command not found\n")
 
 
 if __name__ == "__main__":
