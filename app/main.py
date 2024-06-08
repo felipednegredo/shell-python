@@ -22,8 +22,10 @@ def main():
                 command = user_command[5:]
                 if command in valid_commands:
                     sys.stdout.write(f"{command} is a shell builtin\n")
+                    continue
                 else:
                     sys.stdout.write(f"{command} is /usr/bin/{command}\n")
+                    continue
             if user_command not in valid_commands:
                 sys.stdout.write(f"{user_command}: command not found\n")
                 sys.stdout.flush()
