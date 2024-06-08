@@ -60,8 +60,11 @@ def main():
                 # Executa o comando
                 valids_commands[command](user_command)
             else:
-                # Executa o comando
-                subprocess.run(user_command, shell=True)
+                try:
+                    subprocess.run(user_command, shell=True, check=True)
+                except subprocess.CalledProcessError as e:
+                    sys.stdout.write(f"{command}: command not found\n")
+                    sys.stdout.flush()
 
 
 if __name__ == "__main__":
