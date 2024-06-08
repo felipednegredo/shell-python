@@ -26,7 +26,7 @@ def action_type(user_command):
     elif command_path:
         sys.stdout.write(f"{command} is {command_path}\n")
     else:
-        sys.stdout.write(f"{command}: not found\n")
+        sys.stdout.write(f"{command_path}: not found\n")
     sys.stdout.flush()
 
 
@@ -60,11 +60,8 @@ def main():
                 # Executa o comando
                 valids_commands[command](user_command)
             else:
-                try:
-                    subprocess.run(user_command, shell=True, check=True)
-                except subprocess.CalledProcessError as e:
-                    sys.stdout.write(f"{command}: command not found\n")
-                    sys.stdout.flush()
+                # Executa o comando
+                subprocess.run(user_command, shell=True)
 
 
 if __name__ == "__main__":
