@@ -50,7 +50,7 @@ def main():
                     sys.stdout.write(f"{command}: not found\n")
                 else:
                     # Imprime que o comando está em /bin
-                    sys.stdout.write(f"{command} is /bin/{command_path}\n")
+                    sys.stdout.write(f"{command} is {command_path}\n")
                 continue
                 # Se não for nenhum dos comandos acima, imprime que o comando não existe
             elif user_command == "help":
