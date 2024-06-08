@@ -48,19 +48,21 @@ def main():
         # Força a escrita do buffer
         sys.stdout.flush()
 
-        PATH = os.getenv("PATH")
+        user_command = sys.stdin.readline().strip()
 
-        # Lê a entrada do usuário
-        if user_command := input().strip():
-            # Separa o comando e os argumentos
-            command, *args = user_command.split()
-            # Verifica se o comando é válido
-            if command in valids_commands:
-                # Executa o comando
-                valids_commands[command](user_command)
-            else:
-                # Executa o comando
-                subprocess.run(user_command, shell=True)
+        command, *args = user_command.split(" ")
+
+        if command in valids_commands:
+            valids_commands[command](args)
+            continue
+        elif executable := locate_executable(command):
+            subprocess.run([executable, *args])
+            continue
+        else:
+            sys.stdout.write(f"{command}: not found\n")
+            sys.stdout.flush()
+
+    sys.stdout.flush()
 
 
 if __name__ == "__main__":
