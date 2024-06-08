@@ -5,11 +5,14 @@ import subprocess
 from typing import Optional
 
 def locate_executable(command) -> Optional[str]:
-    path = os.environ.get("PATH", "")
+    path = os.environ['PATH']
+    print("Path: " + path)
+    print(f"Param: {command}")
     for directory in path.split(":"):
-        file_path = os.path.join(directory, command)
-        if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
-            return file_path
+        for (dirpath, dirnames, filenames) in os.walk(directory):
+            if command in filenames:
+                return f"{dirpath}/{command}"
+    return None
 
 def action_echo(user_command):
     sys.stdout.write(user_command[5:] + "\n")
@@ -48,21 +51,19 @@ def main():
         # Força a escrita do buffer
         sys.stdout.flush()
 
-        user_command = sys.stdin.readline().strip()
+        PATH = os.getenv("PATH")
 
-        command, *args = user_command.split(" ")
-
-        if command in valids_commands:
-            valids_commands[command](args)
-            continue
-        elif executable := locate_executable(command):
-            subprocess.run([executable, *args])
-            continue
-        else:
-            sys.stdout.write(f"{command}: not found\n")
-            sys.stdout.flush()
-
-    sys.stdout.flush()
+        # Lê a entrada do usuário
+        if user_command := input().strip():
+            # Separa o comando e os argumentos
+            command, *args = user_command.split()
+            # Verifica se o comando é válido
+            if command in valids_commands:
+                # Executa o comando
+                valids_commands[command](user_command)
+            else:
+                # Executa o comando
+                subprocess.run(user_command, shell=True)
 
 
 if __name__ == "__main__":
