@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 # noinspection PyUnreachableCode
 def main():
@@ -49,12 +50,17 @@ def main():
                     # Imprime que o comando não existe
                     sys.stdout.write(f"{command}: not found\n")
                 else:
-                    # Imprime que o comando está em /bin
+                    # Imprime que o comando está no path
                     sys.stdout.write(f"{command} is {command_path}\n")
                 continue
                 # Se não for nenhum dos comandos acima, imprime que o comando não existe
             elif user_command == "help":
                 sys.stdout.write(f"Valid commands: {', '.join(valid_commands)}\n")
+            else:
+                for path in PATH.split(":"):
+                    if os.path.exists(f"{path}/{user_command}"):
+                        subprocess.run(f"{path}/{user_command}")
+                        break
 
             if user_command not in valid_commands:
                 # Imprime que o comando não existe
