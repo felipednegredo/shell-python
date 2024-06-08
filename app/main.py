@@ -26,12 +26,8 @@ def action_type(user_command):
     elif command_path:
         sys.stdout.write(f"{command} is {command_path}\n")
     else:
-        if command_path is None:
-            sys.stdout.write(f"{command_path}: not found\n")
-        else:
-            sys.stdout.write(f"{command}: not found\n")
+        sys.stdout.write(f"{command}: not found\n")
     sys.stdout.flush()
-
 
 def action_help(user_command):
     sys.stdout.write(f"Valid commands: {', '.join(valids_commands)}\n")
