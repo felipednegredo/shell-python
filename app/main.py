@@ -35,10 +35,15 @@ def action_help(user_command):
     sys.stdout.write(f"Valid commands: {', '.join(valids_commands)}\n")
     sys.stdout.flush()
 
+def action_pwd(user_command):
+    sys.stdout.write(os.getcwd() + "\n")
+    sys.stdout.flush()
+
 valids_commands = {"echo": action_echo,
                    "exit": action_exit,
                    "type": action_type,
-                   "help": action_help}
+                   "help": action_help
+                   "pwd" : action_pwd}
 
 # noinspection PyUnreachableCode
 def main():
