@@ -68,7 +68,7 @@ def main():
                     sys.stdout.write(error_message)
                     sys.stdout.flush()
                 else:
-                    sys.stdout.write('\n')
+                    sys.stdout.write(process.stdout.decode('utf-8'))
                     sys.stdout.flush()
 
 
