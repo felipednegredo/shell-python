@@ -60,7 +60,12 @@ def main():
                 valids_commands[command](user_command)
             else:
                 # Executa o comando
-                subprocess.run(user_command, shell=True)
+                process = subprocess.run(user_command, shell=True)
+                error_message = process.stderr.decode('utf-8')
+                error_message = error_message.replace('/bin/sh: ', '')
+
+                sys.stdout.write(error_message)
+                sys.stdout.flush()
 
 
 if __name__ == "__main__":
