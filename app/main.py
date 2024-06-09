@@ -42,7 +42,7 @@ def action_pwd(user_command):
 valids_commands = {"echo": action_echo,
                    "exit": action_exit,
                    "type": action_type,
-                   "help": action_help
+                   "help": action_help,
                    "pwd" : action_pwd}
 
 # noinspection PyUnreachableCode
