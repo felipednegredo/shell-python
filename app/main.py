@@ -62,7 +62,6 @@ def main():
                 # Executa o comando
                 process = subprocess.run(user_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 sys.stdout.write(process.stdout.decode('utf-8'))
-                sys.stdout.flush()
 
 
 if __name__ == "__main__":
