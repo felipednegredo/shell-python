@@ -4,6 +4,7 @@ import subprocess
 
 from typing import Optional
 
+
 def locate_executable(command) -> Optional[str]:
     path = os.environ.get("PATH", "")
     for directory in path.split(":"):
@@ -12,12 +13,15 @@ def locate_executable(command) -> Optional[str]:
             return file_path
     return None
 
+
 def action_echo(user_command):
     sys.stdout.write(user_command[5:] + "\n")
     sys.stdout.flush()
 
-def action_exit(user_command):
+
+def action_exit():
     sys.exit(0)
+
 
 def action_type(user_command):
     command = user_command[5:]
@@ -31,23 +35,35 @@ def action_type(user_command):
         sys.stdout.write(f"{command}: not found\n")
     sys.stdout.flush()
 
-def action_help(user_command):
+
+def action_help():
     sys.stdout.write(f"Valid commands: {', '.join(valids_commands)}\n")
     sys.stdout.flush()
 
-def action_pwd(user_command):
+
+def action_pwd():
     sys.stdout.write(os.getcwd() + "\n")
     sys.stdout.flush()
+
+
+def action_cd(user_command):
+    try:
+        os.chdir(user_command[3:])
+    except FileNotFoundError:
+        sys.stdout.write(f"cd: {user_command[3:]}: No such file or directory\n")
+        sys.stdout.flush()
+
 
 valids_commands = {"echo": action_echo,
                    "exit": action_exit,
                    "type": action_type,
                    "help": action_help,
-                   "pwd" : action_pwd}
+                   "pwd": action_pwd,
+                   "cd": action_cd}
+
 
 # noinspection PyUnreachableCode
 def main():
-
     # Loop para simular o shell
     while True:
         # Imprime o prompt
