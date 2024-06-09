@@ -47,10 +47,13 @@ def action_pwd(user_command):
 
 
 def action_cd(user_command):
+    directory = user_command[3:]
+    # Replace ~ with the home directory
+    directory = os.path.expanduser(directory)
     try:
-        os.chdir(user_command[3:])
+        os.chdir(directory)
     except FileNotFoundError:
-        sys.stdout.write(f"cd: {user_command[3:]}: No such file or directory\n")
+        sys.stdout.write(f"cd: {directory}: No such file or directory\n")
         sys.stdout.flush()
 
 
