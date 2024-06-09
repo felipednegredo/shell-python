@@ -61,6 +61,7 @@ valids_commands = {"echo": action_echo,
                    "pwd": action_pwd,
                    "cd": action_cd}
 
+
 def main():
     # Loop para simular o shell
     while True:
