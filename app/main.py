@@ -19,7 +19,7 @@ def action_echo(user_command):
     sys.stdout.flush()
 
 
-def action_exit():
+def action_exit(user_command):
     sys.exit(0)
 
 
@@ -36,12 +36,12 @@ def action_type(user_command):
     sys.stdout.flush()
 
 
-def action_help():
+def action_help(user_command):
     sys.stdout.write(f"Valid commands: {', '.join(valids_commands)}\n")
     sys.stdout.flush()
 
 
-def action_pwd():
+def action_pwd(user_command):
     sys.stdout.write(os.getcwd() + "\n")
     sys.stdout.flush()
 
@@ -61,8 +61,6 @@ valids_commands = {"echo": action_echo,
                    "pwd": action_pwd,
                    "cd": action_cd}
 
-
-# noinspection PyUnreachableCode
 def main():
     # Loop para simular o shell
     while True:
