@@ -50,8 +50,6 @@ def main():
         # Força a escrita do buffer
         sys.stdout.flush()
 
-        PATH = os.getenv("PATH")
-
         # Lê a entrada do usuário
         if user_command := input().strip():
             # Separa o comando e os argumentos
