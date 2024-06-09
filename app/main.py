@@ -60,12 +60,16 @@ def main():
                 valids_commands[command](user_command)
             else:
                 # Executa o comando
-                process = subprocess.run(user_command, shell=True)
-                error_message = process.stderr.decode('utf-8')
-                error_message = error_message.replace('/bin/sh: ', '')
+                process = subprocess.run(user_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                if process.stderr:
+                    error_message = process.stderr.decode('utf-8')
+                    error_message = error_message.replace('/bin/sh: ', '')
 
-                sys.stdout.write(error_message)
-                sys.stdout.flush()
+                    sys.stdout.write(error_message)
+                    sys.stdout.flush()
+                else:
+                    sys.stdout.write('\n')
+                    sys.stdout.flush()
 
 
 if __name__ == "__main__":
